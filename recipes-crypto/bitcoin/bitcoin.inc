@@ -8,10 +8,6 @@ inherit autotools pkgconfig systemd
 
 S = "${WORKDIR}/git"
 
-EXTRA_OECONF += "\
-	--with-boost-libdir=${STAGING_LIBDIR} \
-"
-
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[wallet] = "--enable-wallet,--disable-wallet, libdb_cxx"
 PACKAGECONFIG[miniupnpc] = "--enable-miniupnpc,--disable-miniupnpc"

@@ -20,19 +20,6 @@ This layer depends on:
 ### monero
 Does not build.
 
-### bitcoin
-The last version that builds is `bitcoin = "0.17.2"`. Higher versions fail because of an issue with finding boost:
-```
-| checking whether the Boost::System library is available... no
-| checking whether the Boost::Filesystem library is available... no
-| checking whether the Boost::Thread library is available... no
-| checking whether the Boost::Chrono library is available... no
-| checking whether the Boost::Unit_Test_Framework library is available... no
-| checking for dynamic linked boost test... no
-| checking for mismatched boost c++11 scoped enums... ok
-| configure: error: No working boost sleep implementation found.
-```
-
 ### docker-compose
 For `docker-compose` to build, the recipes in `recipes-devtools/python` are needed. Select these versions in your image with
 ```
