@@ -1,6 +1,0 @@
-[Unit]
-Description=Bitcoind service
-
-[Service]
-User=rockpro
-ExecStart=bitcoind -disablewallet -printtoconsole -dbcache=100
