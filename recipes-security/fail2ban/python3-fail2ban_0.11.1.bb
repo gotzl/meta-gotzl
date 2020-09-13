@@ -20,7 +20,7 @@ inherit setuptools3 systemd
 S = "${WORKDIR}/git"
 
 do_compile_append () {
-    2to3 -w -n ${S}/build
+    2to3 -w -n ${S}/bin
 }
 
 do_install_append () {

@@ -20,11 +20,16 @@ do_install_append () {
     # adjust startup parameters
     sed -i -e 's,\(^ExecStart=/usr/bin/bitcoind\),\1 -disablewallet -printtoconsole -dbcache=100,g' \
         ${D}${systemd_unitdir}/system/bitcoind.service
+
+    # FIXME:
+    # comment ConfigurationDirectory, it conflicts with r/o filesystem and we don't use a config anyways
+    # comment ExecStartPre=/bin/chgrp, it conflicts with r/o filesystem
 }
 
 SYSTEMD_SERVICE_${PN} = "bitcoind.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
+# FIXME: user is no created !?
 EXTRA_USERS_PARAMS = "\
-	useradd -M -r -s /bin/flase bitcoin \
+	useradd -u 1100 -g 1100 -M -r -s /bin/flase bitcoin \
 "
