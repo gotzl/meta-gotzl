@@ -29,7 +29,7 @@ do_install_append () {
 SYSTEMD_SERVICE_${PN} = "bitcoind.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
-# FIXME: user is no created !?
-EXTRA_USERS_PARAMS = "\
-	useradd -u 1100 -g 1100 -M -r -s /bin/flase bitcoin \
+EXTRA_USERS_PARAMS = " \
+    groupadd bitcoin; \
+	useradd -u 1100 -g 1100 -M -r -s /bin/false bitcoin; \
 "
