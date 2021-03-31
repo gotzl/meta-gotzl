@@ -9,7 +9,7 @@ Please see the corresponding sections below for details.
 This layer depends on:
 
 [poky](git://git.yoctoproject.org/poky)
-* branch: zeus
+* branch: dunfell
 
 [meta-openembedded](git://git.openembedded.org/meta-openembedded)
 * layers: meta-oe meta-filesystems meta-networking
