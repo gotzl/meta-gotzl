@@ -1,4 +1,4 @@
-inherit cargo systemd
+inherit cargo systemd useradd
 
 SUMMARY = "parity-etherum"
 LICENSE = "GPL"
@@ -24,7 +24,6 @@ do_install_append () {
 SYSTEMD_SERVICE_${PN} = "openethereum.service"
 SYSTEMD_AUTO_ENABLE_${PN} = "disable"
 
-EXTRA_USERS_PARAMS = "\
-    groupadd ether; \
-	useradd -u 1101 -g 1101 -M -r -s /bin/false ether; \
-"
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "-g 1101 ether"
+USERADD_PARAM_${PN} = "-u 1101 -g ether -M -r -s /bin/false ether"
