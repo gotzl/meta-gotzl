@@ -31,6 +31,10 @@ do_install_append() {
     install -m 644 ${S}/utils/conf/monerod.conf ${D}${sysconfdir}
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/utils/systemd/monerod.service ${D}${systemd_unitdir}/system
+
+    # the monero user has no home dir ...
+    sed -i -e 's/^WorkingDirectory=/# WorkingDirectory=/g' \
+           ${D}${systemd_unitdir}/system/monerod.service    
 }
 
 SYSTEMD_SERVICE_${PN} = "monerod.service"
