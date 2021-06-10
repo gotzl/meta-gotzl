@@ -5,7 +5,7 @@ LICENSE = "GPLv3"
 LIC_FILES_CHKSUM = "file://../git/LICENSE;md5=7702f203b58979ebbc31bfaeb44f219c"
 
 SRC_URI = "git://github.com/${BPN}/${BPN}.git;protocol=git;branch=main"
-SRCREV = "5fdedf0858bf1ae95e718909a1476d8172845f6c"
+SRCREV = "f9f492638cce143efc5106c1bdf6f4dba5cdff8b"
 
 S = "${WORKDIR}/git"
 

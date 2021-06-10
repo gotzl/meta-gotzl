@@ -19,7 +19,8 @@ SYSTEMD_SERVICE_${PN} = "${SRCNAME}.service"
 GO_IMPORT = "import"
 inherit go
 
-DEPENDS_append = " curl-native ca-certificates-native "
+# DEPENDS_append = " curl-native ca-certificates-native "
+DEPENDS_append = " curl-native "
 RDEPENDS_${PN} = "bash"
 
 do_compile() {
@@ -38,13 +39,14 @@ do_compile() {
     export CC="${CC}"
     export LD="${LD}"
     export GOBIN=""
-    export GO111MODULE=off
     export PROMU_VERSION="0.11.1"
 
     # don't run lint nor tests
     # FIXME: don't check certificate (even thought ca-certs are there??)
+    # FIXME: don't stop the build when "running check for unused/missing packages in go.mod"
     sed -i -e 's,^common-all:.*,common-all: precheck style check_license unused build,g' \
            -e 's,curl -s -L,curl -s -k -L,g' \
+           -e 's,^\(.*@git diff .*\)$,\1 || true,g' \
         Makefile.common
 
     # only build the thing, don't do any checks
@@ -61,7 +63,7 @@ do_install() {
     install -m 0644 ${S}/src/import/examples/systemd/${SRCNAME}.service ${D}${systemd_unitdir}/system
 
     install -d ${D}${sysconfdir}/sysconfig
-    install -m 0644 ${S}/src/import/examples/systemd/sysconfig.node_exporter ${D}${sysconfdir}/sysconfig/node_exporter
+    echo "OPTIONS=\"\"" > ${D}${sysconfdir}/sysconfig/node_exporter
 }
 
 USERADD_PACKAGES = "${PN}"

@@ -1,0 +1,13 @@
+[Unit]
+Description=Eth2 beacon node
+After=network.target 
+
+[Service]
+EnvironmentFile=/etc/lighthouse/lighthouse-beacon-node.conf
+ExecStart=/usr/bin/lighthouse $ARGS --eth1-endpoints ${ETH1_ENDPOINTS} --validator-monitor-pubkeys ${VALIDATOR_MONITOR_PUBKEYS}
+User=ether
+Group=ether
+Restart=on-failure
+
+[Install]
+WantedBy=default.target

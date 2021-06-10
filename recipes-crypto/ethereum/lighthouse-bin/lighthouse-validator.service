@@ -1,0 +1,13 @@
+[Unit]
+Description=Eth2 validator node
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/lighthouse/lighthouse-validator.conf
+ExecStart=/usr/bin/lighthouse $ARGS --beacon-nodes ${BEACON_NODES}
+User=ether
+Group=ether
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
