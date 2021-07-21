@@ -1,0 +1,17 @@
+[Unit]
+Description=Geth Daemon
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/geth/geth.conf
+ExecStart=/usr/bin/geth $ARGS
+User=ether
+Group=ether
+Restart=on-failure
+
+# Specifies which signal to use when killing a service. Defaults to SIGTERM.
+# SIGHUP gives openethereum time to exit cleanly before SIGKILL (default 90s)
+KillSignal=SIGHUP
+
+[Install]
+WantedBy=default.target

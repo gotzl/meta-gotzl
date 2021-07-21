@@ -17,8 +17,9 @@ EXTRA_OECMAKE=" \
 "
 
 do_configure_prepend() {
-    cd ${S}
+    pushd ${S}
     git submodule update --init --recursive
+    popd
 
     # use the already build `generate_translations_header` binary
     sed -i 's,COMMAND \./generate_translations_header,COMMAND ${STAGING_DIR_NATIVE}/usr/bin/generate_translations_header,g' ${S}/translations/CMakeLists.txt
