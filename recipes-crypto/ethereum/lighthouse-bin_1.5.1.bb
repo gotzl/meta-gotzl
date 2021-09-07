@@ -10,7 +10,7 @@ SRC_URI_append = " \
     file://lighthouse-validator.service \
 "
 
-inherit systemd
+inherit systemd useradd
 
 def get_by_arch(hashes, arch):
     try:
@@ -20,15 +20,15 @@ def get_by_arch(hashes, arch):
 
 def lighthouse_md5(arch):
     HASHES = {
-        "aarch64": "5af968f49a36f2a3533eabe9f2ed9860",
+        "aarch64": "0bd4df3357410f0c05988827f9bebe86",
         "x86_64": "",
     }
     return get_by_arch(HASHES, arch)
 
 def lighthouse_url(arch):
     URLS = {
-        "aarch64": "https://github.com/sigp/lighthouse/releases/download/v1.4.0/lighthouse-v1.4.0-aarch64-unknown-linux-gnu.tar.gz",
-        "x86_64": "https://github.com/sigp/lighthouse/releases/download/v1.4.0/lighthouse-v1.4.0-x86_64-unknown-linux-gnu.tar.gz",
+        "aarch64": "https://github.com/sigp/lighthouse/releases/download/v${PV}/lighthouse-v${PV}-aarch64-unknown-linux-gnu.tar.gz",
+        "x86_64": "https://github.com/sigp/lighthouse/releases/download/v${PV}/lighthouse-v${PV}-x86_64-unknown-linux-gnu.tar.gz",
     }
     return get_by_arch(URLS, arch)
 
@@ -69,3 +69,6 @@ SYSTEMD_SERVICE_${PN}-validator = "lighthouse-validator.service"
 SYSTEMD_AUTO_ENABLE_${PN}-beacon-node = "disable"
 SYSTEMD_AUTO_ENABLE_${PN}-validator = "disable"
 
+USERADD_PACKAGES = "${PN}"
+GROUPADD_PARAM_${PN} = "-g 1101 ether"
+USERADD_PARAM_${PN} = "-u 1101 -g ether -M -r -s /bin/false ether"
