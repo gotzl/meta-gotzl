@@ -14,13 +14,21 @@ SRCREV = "6747d29f2fb402b36e33227b64448f6999ca754e"
 
 S = "${WORKDIR}/git"
 
-inherit pkgconfig
+inherit pkgconfig systemd
+
+SYSTEMD_PACKAGES = "${PN} ${PN}-rpcdaemon"
+SYSTEMD_SERVICE_${PN} = "${PN}.service"
+SYSTEMD_SERVICE_${PN}-rpcdaemon = "${PN}-rpcdaemon.service"
+
+SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+SYSTEMD_AUTO_ENABLE_${PN}-rpcdaemon = "disable"
+
+PACKAGE_BEFORE_PN = "${PN}-rpcdaemon"
+RDEPENDS_${PN} += "${PN}-rpcdaemon"
+
 
 GO_IMPORT = "import"
 inherit go
-
-DEPENDS = ""
-RDEPENDS_${PN} = ""
 
 do_compile() {
 
@@ -55,8 +63,3 @@ do_install() {
     install -m 0644 ${WORKDIR}/${PN}-rpcdaemon.service ${D}${systemd_unitdir}/system    
 }
 
-SYSTEMD_SERVICE_${PN} = "${PN}.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-
-SYSTEMD_SERVICE_${PN}-rpcdaemon = "${PN}-rpcdaemon.service"
-SYSTEMD_AUTO_ENABLE_${PN}-rpcdaemon = "disable"
