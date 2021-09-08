@@ -1,0 +1,18 @@
+[Unit]
+Description=Erigon Daemon 
+After=network.target
+RequiresMountsFor=/ssd
+ 
+[Service]
+EnvironmentFile=/etc/erigon/erigon.conf
+ExecStart=/usr/bin/erigon $ARGS
+User=ether
+Group=ether
+Restart=on-failure
+ 
+# Specifies which signal to use when killing a service. Defaults to SIGTERM.
+# SIGHUP gives openethereum time to exit cleanly before SIGKILL (default 90s)
+KillSignal=SIGHUP
+ 
+[Install]
+WantedBy=default.target
