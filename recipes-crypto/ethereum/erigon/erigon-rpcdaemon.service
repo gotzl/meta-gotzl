@@ -1,7 +1,6 @@
 [Unit]
 Description=Erigon Daemon 
 After=network.target
-RequiresMountsFor=/ssd
  
 [Service]
 EnvironmentFile=/etc/erigon/rpcdaemon.conf

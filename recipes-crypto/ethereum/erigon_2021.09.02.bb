@@ -63,3 +63,15 @@ do_install() {
     install -m 0644 ${WORKDIR}/${PN}-rpcdaemon.service ${D}${systemd_unitdir}/system    
 }
 
+
+FILES_${PN} = " \
+	${bindir}/${PN} \
+	${sysconfdir}/${PN}/${PN}.conf \
+        ${systemd_unitdir}/system/${PN}.service \
+"
+
+FILES_${PN}-rpcdaemon = " \
+        ${bindir}/rpcdaemon \
+        ${sysconfdir}/${PN}/rpcdaemon.conf \
+        ${systemd_unitdir}/system/rpcdaemon.service \
+"
