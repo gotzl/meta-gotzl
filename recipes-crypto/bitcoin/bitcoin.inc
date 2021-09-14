@@ -6,8 +6,6 @@ RDEPENDS_${PN} = "boost-system boost-thread boost-filesystem boost-chrono"
 
 inherit autotools pkgconfig systemd useradd
 
-S = "${WORKDIR}/git"
-
 PACKAGECONFIG ??= ""
 PACKAGECONFIG[wallet] = "--enable-wallet,--disable-wallet, libdb_cxx"
 PACKAGECONFIG[miniupnpc] = "--enable-miniupnpc,--disable-miniupnpc"
