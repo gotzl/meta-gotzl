@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://src/import/COPYING;md5=1ebbd3e34237af26da5dc08a4e4404
 SRCNAME = "erigon"
 
 PKG_NAME = "github.com/ledgerwatch/${SRCNAME}"
-SRC_URI = "git://${PKG_NAME}.git;branch=stable \
+SRC_URI = "git://${PKG_NAME}.git;branch=devel \
     file://erigon.service \
     file://erigon-rpcdaemon.service \
 "
 
-SRCREV = "4585841a52bddbc27c6246afd80d9cec324612c7"
+SRCREV = "5c377a4f01859e320e899e9a3399d9ff1a3c69b6"
 
 S = "${WORKDIR}/git"
 
