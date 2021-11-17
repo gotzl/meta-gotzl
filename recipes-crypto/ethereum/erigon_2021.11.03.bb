@@ -10,7 +10,7 @@ SRC_URI = "git://${PKG_NAME}.git;branch=stable \
     file://erigon-rpcdaemon.service \
 "
 
-SRCREV = "3a6004e8ac98155924c53b03361c6f8ff4e0f930"
+SRCREV = "a37afc5b1546c1ee4c3056fec1315060d03442bd"
 
 S = "${WORKDIR}/git"
 
