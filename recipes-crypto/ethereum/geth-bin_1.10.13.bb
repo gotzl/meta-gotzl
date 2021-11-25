@@ -16,19 +16,19 @@ def get_by_arch(hashes, arch):
 
 def geth_md5(arch):
     HASHES = {
-        "aarch64": "dde74e0ef2f9a01702005df8cc88d90b",
-        "armv7": "a5d3ca6003324fd72c983f487d864f2f",
-        "i686": "af3c254a25c2d58c60c6cdd63b24ef30",
-        "x86_64": "51b5efdd8f76ced8e2d2152188b652dd",
+        "aarch64": "78558d1ea0f7d1e49e98bef325d2cbc4",
+        "armv7": "70267a883566ef3df8e188c61452d5ea",
+        "i686": "a6128d8abc87e19d44306822ef050ece",
+        "x86_64": "a1dfdd549ee779654c196d1b01e0ca67",
     }
     return get_by_arch(HASHES, arch)
 
 def geth_url(arch):
     URLS = {
-        "aarch64": "https://gethstore.blob.core.windows.net/builds/geth-linux-arm64-${PV}-6c4dc6c3.tar.gz",
-        "armv7": "https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-${PV}-6c4dc6c3.tar.gz",
-        "i686": "https://gethstore.blob.core.windows.net/builds/geth-linux-386-${PV}-6c4dc6c3.tar.gz",
-        "x86_64": "https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-${PV}-6c4dc6c3.tar.gz",
+        "aarch64": "https://gethstore.blob.core.windows.net/builds/geth-linux-arm64-${PV}-7a0c19f8.tar.gz",
+        "armv7": "https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-${PV}-7a0c19f8.tar.gz",
+        "i686": "https://gethstore.blob.core.windows.net/builds/geth-linux-386-${PV}-7a0c19f8.tar.gz",
+        "x86_64": "https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-${PV}-7a0c19f8.tar.gz",
     }
     return get_by_arch(URLS, arch)
 
