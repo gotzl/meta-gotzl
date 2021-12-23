@@ -10,7 +10,7 @@ SRC_URI = "git://${PKG_NAME}.git;branch=stable \
     file://erigon-rpcdaemon.service \
 "
 
-SRCREV = "v2021.12.01"
+SRCREV = "v${PV}"
 
 S = "${WORKDIR}/git"
 
@@ -75,3 +75,4 @@ FILES_${PN}-rpcdaemon = " \
         ${sysconfdir}/${PN}/rpcdaemon.conf \
         ${systemd_unitdir}/system/rpcdaemon.service \
 "
+REMOVE_LIBTOOL_LA = "0"
