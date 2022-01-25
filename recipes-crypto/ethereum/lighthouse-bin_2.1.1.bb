@@ -20,8 +20,8 @@ def get_by_arch(hashes, arch):
 
 def lighthouse_md5(arch):
     HASHES = {
-        "aarch64": "1fc9c47c859896716d3ad023552d4c8d",
-        "x86_64": "bf16471a0769c89d62011f17fd6c530d",
+        "aarch64": "1c59931b55ee4b0d38b917d51bffb69a",
+        "x86_64": "65907b7ef490882746170ffc3ebc8462",
     }
     return get_by_arch(HASHES, arch)
 
@@ -72,3 +72,5 @@ SYSTEMD_AUTO_ENABLE_${PN}-validator = "disable"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM_${PN} = "-g 1101 ether"
 USERADD_PARAM_${PN} = "-u 1101 -g ether -M -r -s /bin/false ether"
+
+REMOVE_LIBTOOL_LA = "0"
