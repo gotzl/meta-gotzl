@@ -20,8 +20,8 @@ def get_by_arch(hashes, arch):
 
 def lighthouse_md5(arch):
     HASHES = {
-        "aarch64": "1c59931b55ee4b0d38b917d51bffb69a",
-        "x86_64": "65907b7ef490882746170ffc3ebc8462",
+        "aarch64": "0aac6e2a951777ef466ef278e7d71cde",
+        "x86_64": "bc5f2562de9410ea7cc8414203968a30",
     }
     return get_by_arch(HASHES, arch)
 
