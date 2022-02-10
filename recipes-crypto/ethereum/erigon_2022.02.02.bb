@@ -1,6 +1,6 @@
 SUMMARY = "Ethereum implementation on the efficiency frontier"
 LICENSE = " LGPL-3.0"
-LIC_FILES_CHKSUM = "file://src/import/COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 SRCNAME = "erigon"
 
@@ -27,13 +27,14 @@ PACKAGE_BEFORE_PN = "${PN}-rpcdaemon"
 RDEPENDS_${PN} += "${PN}-rpcdaemon"
 
 
-GO_IMPORT = "import"
+GO_IMPORT = "github.com/ledgerwatch/erigon"
 inherit go
+
 
 do_compile() {
 
     export GOARCH="${TARGET_GOARCH}"
-    cd ${S}/src/import/
+    cd ${S}/src/${GO_IMPORT}/
 
     # Build the target binaries
     export GOARCH="${TARGET_GOARCH}"
@@ -46,7 +47,8 @@ do_compile() {
     export CC="${CC}"
     export LD="${LD}"
     export GOBIN=""
-    export GO111MODULE=off
+    # export GO111MODULE=off
+    export GOFLAGS=-modcacherw
 
     oe_runmake GO=${GO} ${PN}
     oe_runmake GO=${GO} rpcdaemon
@@ -55,8 +57,8 @@ do_compile() {
 
 do_install() {
 	install -d ${D}${bindir}
-	install -m 755 ${B}/src/import/build/bin/${SRCNAME} ${D}${bindir}
-	install -m 755 ${B}/src/import/build/bin/rpcdaemon ${D}${bindir}
+	install -m 755 ${B}/src/${GO_IMPORT}/build/bin/${SRCNAME} ${D}${bindir}
+	install -m 755 ${B}/src/${GO_IMPORT}/build/bin/rpcdaemon ${D}${bindir}
 
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/${PN}.service ${D}${systemd_unitdir}/system    
