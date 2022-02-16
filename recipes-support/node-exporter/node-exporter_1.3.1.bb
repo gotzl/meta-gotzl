@@ -37,7 +37,8 @@ do_compile() {
     export CC="${CC}"
     export LD="${LD}"
     export GOBIN=""
-    export PROMU_VERSION="0.11.1"
+    export PROMU_VERSION="0.13.0"
+    export GOFLAGS=-modcacherw
 
     # don't run lint nor tests
     # FIXME: don't check certificate (even thought ca-certs are there??)
