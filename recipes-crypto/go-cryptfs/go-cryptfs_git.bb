@@ -18,7 +18,7 @@ GO_IMPORT = "import"
 inherit go
 
 DEPENDS = "openssl"
-RDEPENDS_${PN} = "libcrypto fuse-utils bash"
+RDEPENDS:${PN} = "libcrypto fuse-utils bash"
 
 do_compile() {
 

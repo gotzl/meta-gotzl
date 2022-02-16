@@ -1,8 +1,8 @@
-PACKAGECONFIG_append = " libnftnl legacy"
+PACKAGECONFIG:append = " libnftnl legacy"
 PACKAGECONFIG[legacy] = ""
-DEPENDS_append = " bison-native"
+DEPENDS:append = " bison-native"
 
-do_install_append() {
+do_install:append() {
     apps="arptables ebtables iptables"
     if ${@bb.utils.contains("DISTRO_FEATURES", "ipv6", 'true','false', d)}; then
         apps="${apps} ip6tables"

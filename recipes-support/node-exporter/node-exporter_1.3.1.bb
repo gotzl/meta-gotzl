@@ -5,23 +5,21 @@ LIC_FILES_CHKSUM = "file://src/import/LICENSE;md5=86d3f3a95c324c9479bd8986968f43
 SRCNAME = "node_exporter"
 
 PKG_NAME = "github.com/prometheus/${SRCNAME}"
-SRC_URI = "git://${PKG_NAME}.git;branch=release-1.1"
-
-SRCREV = "b597c1244d7bef49e6f3359c87a56dd7707f6719"
-PV = "1.1.2+git${SRCPV}"
+SRC_URI = "git://${PKG_NAME}.git;branch=release-1.3"
+SRCREV = "v${PV}"
 
 S = "${WORKDIR}/git"
 
 inherit pkgconfig systemd useradd
 
-SYSTEMD_SERVICE_${PN} = "${SRCNAME}.service"
+SYSTEMD_SERVICE:${PN} = "${SRCNAME}.service"
 
 GO_IMPORT = "import"
 inherit go
 
-# DEPENDS_append = " curl-native ca-certificates-native "
-DEPENDS_append = " curl-native "
-RDEPENDS_${PN} = "bash"
+# DEPENDS:append = " curl-native ca-certificates-native "
+DEPENDS:append = " curl-native "
+RDEPENDS:${PN} = "bash"
 
 do_compile() {
 
@@ -67,4 +65,4 @@ do_install() {
 }
 
 USERADD_PACKAGES = "${PN}"
-USERADD_PARAM_${PN} = "-M -r -s /bin/false node_exporter"
+USERADD_PARAM:${PN} = "-M -r -s /bin/false node_exporter"

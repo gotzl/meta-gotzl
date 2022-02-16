@@ -17,14 +17,14 @@ S = "${WORKDIR}/git"
 inherit pkgconfig systemd
 
 SYSTEMD_PACKAGES = "${PN} ${PN}-rpcdaemon"
-SYSTEMD_SERVICE_${PN} = "${PN}.service"
-SYSTEMD_SERVICE_${PN}-rpcdaemon = "${PN}-rpcdaemon.service"
+SYSTEMD_SERVICE:${PN} = "${PN}.service"
+SYSTEMD_SERVICE:${PN}-rpcdaemon = "${PN}-rpcdaemon.service"
 
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
-SYSTEMD_AUTO_ENABLE_${PN}-rpcdaemon = "disable"
+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
+SYSTEMD_AUTO_ENABLE:${PN}-rpcdaemon = "disable"
 
 PACKAGE_BEFORE_PN = "${PN}-rpcdaemon"
-RDEPENDS_${PN} += "${PN}-rpcdaemon"
+RDEPENDS:${PN} += "${PN}-rpcdaemon"
 
 
 GO_IMPORT = "github.com/ledgerwatch/erigon"
@@ -66,13 +66,13 @@ do_install() {
 }
 
 
-FILES_${PN} = " \
+FILES:${PN} = " \
 	${bindir}/${PN} \
 	${sysconfdir}/${PN}/${PN}.conf \
         ${systemd_unitdir}/system/${PN}.service \
 "
 
-FILES_${PN}-rpcdaemon = " \
+FILES:${PN}-rpcdaemon = " \
         ${bindir}/rpcdaemon \
         ${sysconfdir}/${PN}/rpcdaemon.conf \
         ${systemd_unitdir}/system/rpcdaemon.service \

@@ -16,7 +16,7 @@ EXTRA_OECMAKE=" \
     -D CMAKE_BUILD_TYPE=release \
 "
 
-do_configure_prepend() {
+do_configure:prepend() {
     pushd ${S}
     git submodule update --init --recursive
     popd
@@ -27,7 +27,7 @@ do_configure_prepend() {
     sed -i '/^project(monero)/a set_property(GLOBAL APPEND PROPERTY JOB_POOLS compile_job_pool=2)\nset_property(GLOBAL APPEND PROPERTY JOB_POOLS link_job_pool=2)\nset(CMAKE_JOB_POOL_COMPILE compile_job_pool)\nset(CMAKE_JOB_POOL_LINK link_job_pool)' ${S}/CMakeLists.txt
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}
     install -m 644 ${S}/utils/conf/monerod.conf ${D}${sysconfdir}
     install -d ${D}${systemd_unitdir}/system
@@ -38,9 +38,9 @@ do_install_append() {
            ${D}${systemd_unitdir}/system/monerod.service    
 }
 
-SYSTEMD_SERVICE_${PN} = "monerod.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+SYSTEMD_SERVICE:${PN} = "monerod.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "-g 1102 monero"
-USERADD_PARAM_${PN} = "-u 1102 -g monero -M -r -s /bin/false monero"
+GROUPADD_PARAM:${PN} = "-g 1102 monero"
+USERADD_PARAM:${PN} = "-u 1102 -g monero -M -r -s /bin/false monero"

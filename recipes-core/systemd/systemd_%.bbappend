@@ -1,5 +1,5 @@
 
-do_install_append () {
+do_install:append () {
     # ignore the dummy0 device
 	if ${@bb.utils.contains('PACKAGECONFIG','networkd','true','false',d)}; then
         sed -i 's@/lib/systemd/systemd-networkd-wait-online@/lib/systemd/systemd-networkd-wait-online --ignore=dummy0@g' ${D}${systemd_unitdir}/system/systemd-networkd-wait-online.service

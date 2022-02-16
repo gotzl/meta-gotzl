@@ -2,7 +2,7 @@ SUMMARY = "Rust Ethereum 2.0 Client"
 LICENSE = "Apache"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=139bc4b5f578ecacea78dc7b7ad3ed3c"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://LICENSE \
     file://lighthouse-beacon-node.conf \
     file://lighthouse-beacon-node.service \
@@ -60,17 +60,17 @@ do_install() {
     install -m 0644 ${WORKDIR}/lighthouse-validator.service ${D}${systemd_unitdir}/system
 }
 
-PACKAGES_append = " ${SYSTEMD_PACKAGES}"
-RDEPENDS_${PN}_append = " ${SYSTEMD_PACKAGES}"
+PACKAGES:append = " ${SYSTEMD_PACKAGES}"
+RDEPENDS:${PN}:append = " ${SYSTEMD_PACKAGES}"
 
 SYSTEMD_PACKAGES = "${PN}-beacon-node ${PN}-validator"
-SYSTEMD_SERVICE_${PN}-beacon-node = "lighthouse-beacon-node.service"
-SYSTEMD_SERVICE_${PN}-validator = "lighthouse-validator.service"
-SYSTEMD_AUTO_ENABLE_${PN}-beacon-node = "disable"
-SYSTEMD_AUTO_ENABLE_${PN}-validator = "disable"
+SYSTEMD_SERVICE:${PN}-beacon-node = "lighthouse-beacon-node.service"
+SYSTEMD_SERVICE:${PN}-validator = "lighthouse-validator.service"
+SYSTEMD_AUTO_ENABLE:${PN}-beacon-node = "disable"
+SYSTEMD_AUTO_ENABLE:${PN}-validator = "disable"
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "-g 1101 ether"
-USERADD_PARAM_${PN} = "-u 1101 -g ether -M -r -s /bin/false ether"
+GROUPADD_PARAM:${PN} = "-g 1101 ether"
+USERADD_PARAM:${PN} = "-u 1101 -g ether -M -r -s /bin/false ether"
 
 REMOVE_LIBTOOL_LA = "0"

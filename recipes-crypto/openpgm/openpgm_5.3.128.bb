@@ -9,7 +9,7 @@ S = "${WORKDIR}/git/${PN}/pgm"
 
 inherit autotools
 
-do_configure_prepend() {
+do_configure:prepend() {
     cp ${S}/openpgm-5.2.pc.in ${S}/openpgm-5.3.pc.in
     sed -i 's,^AC_CHECK_FILES,# AC_CHECK_FILES,g' ${S}/configure.ac
 }

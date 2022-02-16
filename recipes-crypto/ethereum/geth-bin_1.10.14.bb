@@ -2,7 +2,7 @@ SUMMARY = "Official Go implementation of the Ethereum protocol"
 LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://geth.service \
 "
 
@@ -55,5 +55,5 @@ do_install() {
     install -m 0644 ${WORKDIR}/geth.service ${D}${systemd_unitdir}/system    
 }
 
-SYSTEMD_SERVICE_${PN} = "geth.service"
-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
+SYSTEMD_SERVICE:${PN} = "geth.service"
+SYSTEMD_AUTO_ENABLE:${PN} = "disable"
