@@ -6,9 +6,7 @@ SRCNAME = "gocryptfs"
 
 PKG_NAME = "github.com/rfjakob/${SRCNAME}"
 SRC_URI = "git://${PKG_NAME}.git"
-
-SRCREV = "a6f515008f59131771581d084bcaca20e46e9e52"
-PV = "1.8.0+git${SRCPV}"
+SRCREV = "v${PV}"
 
 S = "${WORKDIR}/git"
 
@@ -36,13 +34,14 @@ do_compile() {
     export CC="${CC}"
     export LD="${LD}"
     export GOBIN=""
-    export GO111MODULE=off
+    # export GO111MODULE=off
+    export GOFLAGS=-modcacherw
 
 	# don't try to run the binary
 	sed -i 's,^\(\./gocryptfs\),# \1,g' build.bash
 
 	# don't render man pages
-	sed -i 's,^\(render\),# \1,g' Documentation/MANPAGE-render.bash
+	sed -i 's,^\(render\s\),# \1,g' Documentation/MANPAGE-render.bash
 
     oe_runmake GO=${GO}
 }
