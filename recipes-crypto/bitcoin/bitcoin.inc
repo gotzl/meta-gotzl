@@ -15,6 +15,10 @@ do_install:append () {
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${S}/contrib/init/bitcoind.service ${D}${systemd_unitdir}/system
 
+    # add empty bitcoin.conf
+    install -d ${D}${sysconfdir}/bitcoin
+    touch ${D}${sysconfdir}/bitcoin/bitcoin.conf
+
     # adjust startup parameters
     sed -i -e 's,\(^ExecStart=/usr/bin/bitcoind\),\1 -disablewallet -printtoconsole -dbcache=100,g' \
            -e 's,^ExecStartPre=,# ExecStartPre=,g' \

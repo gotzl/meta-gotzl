@@ -5,49 +5,35 @@ LIC_FILES_CHKSUM = "file://src/import/LICENSE;md5=6fee026f0b48abb4d7cd72e2503250
 SRCNAME = "gocryptfs"
 
 PKG_NAME = "github.com/rfjakob/${SRCNAME}"
-SRC_URI = "git://${PKG_NAME}.git"
-SRCREV = "v${PV}"
+SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=master"
+SRCREV = "4ba0ced3c704c1cc8696ea76d96822efdd1c7157"
 
 S = "${WORKDIR}/git"
 
 inherit pkgconfig
 
 GO_IMPORT = "import"
-inherit go
+inherit go-mod
 
 DEPENDS = "openssl"
 RDEPENDS:${PN} = "libcrypto fuse-utils bash"
 
-do_compile() {
 
-    export GOARCH="${TARGET_GOARCH}"
-    cd ${S}/src/import/
-
-    # Build the target binaries
-    export GOARCH="${TARGET_GOARCH}"
-    # Pass the needed cflags/ldflags so that cgo can find the needed headers files and libraries
-    export CGO_ENABLED="1"
-    export CGO_CFLAGS="${CFLAGS} --sysroot=${STAGING_DIR_TARGET}"
-    export CGO_LDFLAGS="${LDFLAGS} --sysroot=${STAGING_DIR_TARGET}"
-    export CFLAGS=""
-    export LDFLAGS=""
-    export CC="${CC}"
-    export LD="${LD}"
-    export GOBIN=""
-    # export GO111MODULE=off
-    export GOFLAGS=-modcacherw
+do_compile:prepend() {
+    pushd ${S}/src/import/
 
 	# don't try to run the binary
 	sed -i 's,^\(\./gocryptfs\),# \1,g' build.bash
 
 	# don't render man pages
 	sed -i 's,^\(render\s\),# \1,g' Documentation/MANPAGE-render.bash
-
-    oe_runmake GO=${GO}
+    popd
 }
+# need to download go modules
+do_compile[network] = "1"
 
 
 do_install() {
 	install -d ${D}${bindir}
-	install -m 755 ${B}/src/import/${SRCNAME} ${D}${bindir}
+	install -m 755 ${B}/${GO_BUILD_BINDIR}/* ${D}${bindir}
 }

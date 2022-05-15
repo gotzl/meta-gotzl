@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/COPYING;md5=1ebbd3e34237af26da5dc08a
 SRCNAME = "erigon"
 
 PKG_NAME = "github.com/ledgerwatch/${SRCNAME}"
-SRC_URI = "git://${PKG_NAME}.git;branch=stable \
+SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=stable \
     file://erigon.service \
     file://erigon-rpcdaemon.service \
 "
 
-SRCREV = "v${PV}"
+SRCREV = "d139c750cba2d9ce03e4677d6700b21246c6813f"
 
 S = "${WORKDIR}/git"
 
@@ -26,33 +26,20 @@ SYSTEMD_AUTO_ENABLE:${PN}-rpcdaemon = "disable"
 PACKAGE_BEFORE_PN = "${PN}-rpcdaemon"
 RDEPENDS:${PN} += "${PN}-rpcdaemon"
 
-
 GO_IMPORT = "github.com/ledgerwatch/erigon"
-inherit go
+
+inherit go-mod
+
+GOBUILDFLAGS:append = " -tags nosqlite"
+export CGO_CFLAGS = "${CFLAGS} -DMDBX_FORCE_ASSERTIONS=0 -Wno-format-security -Wno-error=date-time"
 
 
 do_compile() {
-
-    export GOARCH="${TARGET_GOARCH}"
-    cd ${S}/src/${GO_IMPORT}/
-
-    # Build the target binaries
-    export GOARCH="${TARGET_GOARCH}"
-    # Pass the needed cflags/ldflags so that cgo can find the needed headers files and libraries
-    export CGO_ENABLED="1"
-    export CGO_CFLAGS="${CFLAGS} -Wno-format-security -Wno-error=date-time --sysroot=${STAGING_DIR_TARGET}"
-    export CGO_LDFLAGS="${LDFLAGS} --sysroot=${STAGING_DIR_TARGET}"
-    export CFLAGS=""
-    export LDFLAGS=""
-    export CC="${CC}"
-    export LD="${LD}"
-    export GOBIN=""
-    # export GO111MODULE=off
-    export GOFLAGS=-modcacherw
-
     oe_runmake GO=${GO} ${PN}
     oe_runmake GO=${GO} rpcdaemon
 }
+# need to download go modules
+do_compile[network] = "1"
 
 
 do_install() {
@@ -69,7 +56,7 @@ do_install() {
 FILES:${PN} = " \
 	${bindir}/${PN} \
 	${sysconfdir}/${PN}/${PN}.conf \
-        ${systemd_unitdir}/system/${PN}.service \
+    ${systemd_unitdir}/system/${PN}.service \
 "
 
 FILES:${PN}-rpcdaemon = " \

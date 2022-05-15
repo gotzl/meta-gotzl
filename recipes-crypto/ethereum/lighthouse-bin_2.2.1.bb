@@ -1,5 +1,5 @@
 SUMMARY = "Rust Ethereum 2.0 Client"
-LICENSE = "Apache"
+LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://../LICENSE;md5=139bc4b5f578ecacea78dc7b7ad3ed3c"
 
 SRC_URI:append = " \

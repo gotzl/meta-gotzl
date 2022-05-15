@@ -34,7 +34,4 @@ do_install:append() {
             fi
         fi
     done
-
-    # this is packaged by 'netbase' now
-    rm ${D}${sysconfdir}/ethertypes
 }
