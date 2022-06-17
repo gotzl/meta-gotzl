@@ -5,12 +5,12 @@ LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/COPYING;md5=1ebbd3e34237af26da5dc08a
 SRCNAME = "erigon"
 
 PKG_NAME = "github.com/ledgerwatch/${SRCNAME}"
-SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=stable \
+SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=alpha \
     file://erigon.service \
     file://erigon-rpcdaemon.service \
 "
 
-SRCREV = "d139c750cba2d9ce03e4677d6700b21246c6813f"
+SRCREV = "e866889b60f8854d574c54686792488a2cacba95"
 
 S = "${WORKDIR}/git"
 
@@ -43,9 +43,9 @@ do_compile[network] = "1"
 
 
 do_install() {
-	install -d ${D}${bindir}
-	install -m 755 ${B}/src/${GO_IMPORT}/build/bin/${SRCNAME} ${D}${bindir}
-	install -m 755 ${B}/src/${GO_IMPORT}/build/bin/rpcdaemon ${D}${bindir}
+    install -d ${D}${bindir}
+    install -m 755 ${B}/src/${GO_IMPORT}/build/bin/${SRCNAME} ${D}${bindir}
+    install -m 755 ${B}/src/${GO_IMPORT}/build/bin/rpcdaemon ${D}${bindir}
 
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/${PN}.service ${D}${systemd_unitdir}/system    
@@ -54,8 +54,8 @@ do_install() {
 
 
 FILES:${PN} = " \
-	${bindir}/${PN} \
-	${sysconfdir}/${PN}/${PN}.conf \
+    ${bindir}/${PN} \
+    ${sysconfdir}/${PN}/${PN}.conf \
     ${systemd_unitdir}/system/${PN}.service \
 "
 
