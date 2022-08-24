@@ -1,9 +1,9 @@
 SUMMARY = ""
 LICENSE = "monero-project"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=4c2dca935bfb2f56cf2164bee83b1934"
+LIC_FILES_CHKSUM = "file://../LICENSE;md5=25778095b6d857a291b6d8f9769d8a20"
 
-SRC_URI = "git://github.com/monero-project/monero.git;protocol=https;branch=master"
-SRCREV = "b6a029f222abada36c7bc6c65899a4ac969d7dee"
+SRC_URI = "git://github.com/monero-project/monero.git;protocol=https;branch=release-v0.18"
+SRCREV = "727bc5b6878170332bf2d838f2c60d1c8dc685c8"
 
 S = "${WORKDIR}/git/translations"
 

@@ -1,9 +1,9 @@
 SUMMARY = ""
 LICENSE = "monero-project"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=4c2dca935bfb2f56cf2164bee83b1934"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=25778095b6d857a291b6d8f9769d8a20"
 
-SRC_URI = "gitsm://github.com/monero-project/monero.git;protocol=https;branch=master"
-SRCREV = "b6a029f222abada36c7bc6c65899a4ac969d7dee"
+SRC_URI = "gitsm://github.com/monero-project/monero.git;protocol=https;branch=release-v0.18"
+SRCREV = "727bc5b6878170332bf2d838f2c60d1c8dc685c8"
 
 S = "${WORKDIR}/git"
 DEPENDS = "boost openssl zeromq openpgm unbound monero-generate-translations-header-native"
@@ -18,7 +18,7 @@ EXTRA_OECMAKE=" \
 
 do_configure:prepend() {
     # use the already build `generate_translations_header` binary
-    sed -i 's,COMMAND \./generate_translations_header,COMMAND ${STAGING_DIR_NATIVE}/usr/bin/generate_translations_header,g' ${S}/translations/CMakeLists.txt
+    sed -i 's,COMMAND \S*,COMMAND ${STAGING_DIR_NATIVE}/usr/bin/generate_translations_header,g' ${S}/translations/CMakeLists.txt
     # prevent memory blowup
     grep -q compile_job_pool ${S}/CMakeLists.txt || sed -i '/^project(monero)/a set_property(GLOBAL APPEND PROPERTY JOB_POOLS compile_job_pool=2)\nset_property(GLOBAL APPEND PROPERTY JOB_POOLS link_job_pool=2)\nset(CMAKE_JOB_POOL_COMPILE compile_job_pool)\nset(CMAKE_JOB_POOL_LINK link_job_pool)' ${S}/CMakeLists.txt
 }
