@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://src/import/LICENSE;md5=86d3f3a95c324c9479bd8986968f43
 SRCNAME = "node_exporter"
 
 PKG_NAME = "github.com/prometheus/${SRCNAME}"
-SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=release-1.3"
-SRCREV = "a2321e7b940ddcff26873612bccdf7cd4c42b6b6"
+SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=master"
+SRCREV = "7da1321761b3b8dfc9e496e1a60e6a476fec6018"
 
 S = "${WORKDIR}/git"
 
