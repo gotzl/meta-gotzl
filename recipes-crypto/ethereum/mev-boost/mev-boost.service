@@ -1,0 +1,20 @@
+[Unit]
+Description=mev-boost
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+User=ether
+Group=ether
+Type=simple
+Restart=always
+RestartSec=5
+ExecStart=mev-boost \
+        -mainnet \
+        -relay-check \
+        -relay YOUR_RELAY_CHOICE_A \
+        -relay YOUR_RELAY_CHOICE_B \
+        -relay YOUR_RELAY_CHOICE_C
+
+[Install]
+WantedBy=multi-user.target

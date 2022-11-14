@@ -1,0 +1,21 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index e197c88..004ca35 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -3,6 +3,7 @@ name = "bitcoin-exporter"
+ description = "Expose bitcoin core metrics in prometheus format"
+ version = "0.5.4"
+ edition = "2021"
++repository = "https://github.com/eburghar/bitcoin-exporter.git"
+ 
+ [dependencies]
+ anyhow = "1.0.51"
+@@ -17,7 +18,7 @@ env_logger = "0.9.0"
+ log = "0.4.14"
+ bitcoin = "0.27.1"
+ serde = "1.0.132"
+-serde_yaml = "0.8.23"
++serde_yaml = "0.8.24"
+ thiserror = "1.0.30"
+ 
+ [patch.crates-io]
