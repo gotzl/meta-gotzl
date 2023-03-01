@@ -2,7 +2,7 @@
 Description=Bitcoin Exporter
 
 [Service]
-User=bitcoin_exporter
+DynamicUser=yes
 ExecStart=/usr/bin/bitcoin-exporter -c /etc/bitcoin/bitcoin-exporter.conf
 
 [Install]

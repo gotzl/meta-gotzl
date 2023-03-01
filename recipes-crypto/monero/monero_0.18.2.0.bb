@@ -3,7 +3,7 @@ LICENSE = "monero-project"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=25778095b6d857a291b6d8f9769d8a20"
 
 SRC_URI = "gitsm://github.com/monero-project/monero.git;protocol=https;branch=release-v0.18"
-SRCREV = "66184f30859796f3c7c22f9497e41b15b5a4a7c9"
+SRCREV = "99be9a044f3854f339548e2d99c539c18d7b1b01"
 
 S = "${WORKDIR}/git"
 DEPENDS = "boost openssl zeromq openpgm unbound monero-generate-translations-header-native"

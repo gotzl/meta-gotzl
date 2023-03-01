@@ -9,7 +9,7 @@ SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=stable \
     file://erigon.service \
 "
 
-SRCREV = "4ce94d8bfb417d65cd17abb635ee49283ac2088a"
+SRCREV = "b5891e2c8a91a99511223fe9370a951106aa208e"
 
 S = "${WORKDIR}/git"
 
