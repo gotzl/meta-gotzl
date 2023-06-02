@@ -14,13 +14,13 @@ def get_by_arch(hashes, arch):
     except:
         raise bb.parse.SkipRecipe("Unsupported arch: %s" % arch)
 
-HASH = "ea9e62ca"
+HASH = "e501b3b0"
 def geth_md5(arch):
     HASHES = {
-        "aarch64": "5207dee532baace2c0891dd3ef92e05e",
-        "armv7": "07b9df978f396a3463f67e7d67477a70",
-        "i686": "2a953daa798e47069e4b09d80ce4390b",
-        "x86_64": "7531feb4d68308191ad2d8c7c1f17699",
+        "aarch64": "839abba4f437edf26619b0af486503c2",
+        "armv7": "503c616f33204245434b74542e8fd831",
+        "i686": "98ccdcab4623365da336cdff02c896ff",
+        "x86_64": "5e706afb53ef99397ebcc612cd6fab81"
     }
     return get_by_arch(HASHES, arch)
 

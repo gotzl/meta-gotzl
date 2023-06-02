@@ -1,8 +1,8 @@
 require bitcoin.inc
 
-LIC_FILES_CHKSUM = "file://COPYING;md5=d63289bf862229a0ba143ebeadb987a3"
+LIC_FILES_CHKSUM = "file://COPYING;md5=5ab93a32dcc9017fd179fb0dd92da0f0"
 SRC_URI = "https://bitcoincore.org/bin/bitcoin-core-${PV}/bitcoin-${PV}.tar.gz"
-SRC_URI[sha256sum] = "8a0a3db3b2d9cc024e897113f70a3a65d8de831c129eb6d1e26ffa65e7bfaf4e"
+SRC_URI[sha256sum] = "5df67cf42ca3b9a0c38cdafec5bbb517da5b58d251f32c8d2a47511f9be1ebc2"
 
 
 # starting with bitcoin>0.17.2, something broke the way how the 
