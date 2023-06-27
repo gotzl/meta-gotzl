@@ -7,14 +7,17 @@ SRC_URI:append = " \
     file://bitcoin-exporter.service \
 "
 
-inherit systemd
+inherit systemd rust-common
 
 SYSTEMD_SERVICE:${PN} = "bitcoin-exporter.service"
 
 # need to update some git repo ...
 do_compile[network] = "1"
 
-do_install:append() {    
+do_install:append() {
+    install -d ${D}${bindir}
+    install -m 755 ${WORKDIR}/build/target/${TARGET_SYS}/release/bitcoin-exporter ${D}${bindir}
+
     install -d ${D}${systemd_unitdir}/system
     install -m 0644 ${WORKDIR}/bitcoin-exporter.service ${D}${systemd_unitdir}/system
 
