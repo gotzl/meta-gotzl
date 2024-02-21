@@ -2,6 +2,7 @@ SUMMARY = "Official Go implementation of the Ethereum protocol"
 LICENSE = "LGPLv3"
 LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
+FILESEXTRAPATHS:prepend := "${THISDIR}/geth:"
 SRC_URI:append = " \
     file://geth.service \
 "
@@ -14,13 +15,13 @@ def get_by_arch(hashes, arch):
     except:
         raise bb.parse.SkipRecipe("Unsupported arch: %s" % arch)
 
-HASH = "e501b3b0"
+HASH = "02eb36af"
 def geth_md5(arch):
     HASHES = {
-        "aarch64": "839abba4f437edf26619b0af486503c2",
-        "armv7": "503c616f33204245434b74542e8fd831",
-        "i686": "98ccdcab4623365da336cdff02c896ff",
-        "x86_64": "5e706afb53ef99397ebcc612cd6fab81"
+        "aarch64": "ab4ea3382e44760c49a14d5fb643ea3d",
+        "armv7": "31ef6f2df00b903641dd49e34012c0bc",
+        "i686": "22e04c90f1a0334be62e2c908721300c",
+        "x86_64": "4e071d270e6c0e1af39cf2278595ac8d"
     }
     return get_by_arch(HASHES, arch)
 
