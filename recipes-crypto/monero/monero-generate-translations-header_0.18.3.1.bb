@@ -15,3 +15,6 @@ do_install() {
     install -d ${D}${bindir}
     install -m 755 ${B}/generate_translations_header ${D}${bindir}
 }
+
+NO_GENERIC_LICENSE[monero-project] = "../LICENSE"
+INSANE_SKIP:${PN} = "license-exists"

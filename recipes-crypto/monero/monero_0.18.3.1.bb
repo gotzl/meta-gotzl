@@ -40,3 +40,6 @@ SYSTEMD_AUTO_ENABLE:${PN} = "disable"
 USERADD_PACKAGES = "${PN}"
 GROUPADD_PARAM:${PN} = "-g 1102 monero"
 USERADD_PARAM:${PN} = "-u 1102 -g monero -M -r -s /bin/false monero"
+
+NO_GENERIC_LICENSE[monero-project] = "LICENSE"
+INSANE_SKIP:${PN} = "license-exists"

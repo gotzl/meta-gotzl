@@ -1,5 +1,5 @@
 diff --git a/Cargo.toml b/Cargo.toml
-index e197c88..004ca35 100644
+index e197c88..65a5ca6 100644
 --- a/Cargo.toml
 +++ b/Cargo.toml
 @@ -3,6 +3,7 @@ name = "bitcoin-exporter"
@@ -10,7 +10,7 @@ index e197c88..004ca35 100644
  
  [dependencies]
  anyhow = "1.0.51"
-@@ -17,7 +18,7 @@ env_logger = "0.9.0"
+@@ -17,11 +18,11 @@ env_logger = "0.9.0"
  log = "0.4.14"
  bitcoin = "0.27.1"
  serde = "1.0.132"
@@ -19,3 +19,11 @@ index e197c88..004ca35 100644
  thiserror = "1.0.30"
  
  [patch.crates-io]
+-bitcoincore-rpc = { git = "https://github.com/eburghar/rust-bitcoincore-rpc.git", branch = "master" }
+-bitcoincore-rpc-json = { git = "https://github.com/eburghar/rust-bitcoincore-rpc.git", branch = "master" }
+-# bitcoincore-rpc = { path = "../bitcoincore-rpc/client" }
+-# bitcoincore-rpc-json = { path = "../bitcoincore-rpc/json" }
++# bitcoincore-rpc = { git = "https://github.com/eburghar/rust-bitcoincore-rpc.git", branch = "master" }
++# bitcoincore-rpc-json = { git = "https://github.com/eburghar/rust-bitcoincore-rpc.git", branch = "master" }
++bitcoincore-rpc = { path = "../bitcoincore-rpc" }
++bitcoincore-rpc-json = { path = "../json" }
