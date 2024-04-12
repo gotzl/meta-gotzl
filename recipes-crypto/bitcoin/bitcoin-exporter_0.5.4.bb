@@ -16,7 +16,7 @@ CARGO_SRC_DIR = ""
 # please note if you have entries that do not begin with crate://
 # you must change them to how that package can be fetched
 SRC_URI += " \
-    git://github.com/eburghar/rust-bitcoincore-rpc.git;protocol=https;nobranch=1;subpath=json;name=bitcoincore-rpc-json;destsuffix=json \
+    git://github.com/eburghar/rust-bitcoincore-rpc.git;protocol=https;nobranch=1;subpath=json;name=bitcoincore-rpc-json;destsuffix=bitcoincore-rpc-json \
     git://github.com/eburghar/rust-bitcoincore-rpc.git;protocol=https;nobranch=1;subpath=client;name=bitcoincore-rpc;destsuffix=bitcoincore-rpc \
 "
 

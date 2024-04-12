@@ -11,11 +11,8 @@ inherit systemd rust-common cargo
 
 SYSTEMD_SERVICE:${PN} = "bitcoin-exporter.service"
 
-# need to update some git repo ...
-# do_compile[network] = "1"
-
 # FIXME: replace this by CARGO_NO_FROZEN in future 
-CARGO_BUILD_FLAGS = "-v --offline --target ${RUST_HOST_SYS} ${BUILD_MODE} --manifest-path=${MANIFEST_PATH}"
+CARGO_BUILD_FLAGS = "-v --offline --target ${RUST_HOST_SYS} ${BUILD_MODE} --manifest-path=${CARGO_MANIFEST_PATH}"
 
 do_install:append() {
     install -d ${D}${bindir}
