@@ -16,7 +16,7 @@ CARGO_SRC_DIR = ""
 # please note if you have entries that do not begin with crate://
 # you must change them to how that package can be fetched
 SRC_URI += " \
-    git://github.com/eburghar/rust-bitcoincore-rpc.git;protocol=https;nobranch=1;subpath=json;name=bitcoincore-rpc-json;destsuffix=bitcoincore-rpc-json \
+    git://github.com/eburghar/rust-bitcoincore-rpc.git;protocol=https;nobranch=1;subpath=json;name=bitcoincore-rpc-json;destsuffix=json \
     git://github.com/eburghar/rust-bitcoincore-rpc.git;protocol=https;nobranch=1;subpath=client;name=bitcoincore-rpc;destsuffix=bitcoincore-rpc \
 "
 
@@ -25,7 +25,7 @@ SRCREV_bitcoincore-rpc = "${AUTOREV}"
 EXTRA_OECARGO_PATHS = "${WORKDIR}/bitcoincore-rpc"
 SRCREV_FORMAT .= "_bitcoincore-rpc-json"
 SRCREV_bitcoincore-rpc-json = "${AUTOREV}"
-EXTRA_OECARGO_PATHS += "${WORKDIR}/bitcoincore-rpc-json"
+EXTRA_OECARGO_PATHS += "${WORKDIR}/json"
 
 # FIXME: update generateme with the real MD5 of the license file
 LIC_FILES_CHKSUM = " \
