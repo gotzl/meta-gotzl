@@ -15,20 +15,18 @@ def get_by_arch(hashes, arch):
     except:
         raise bb.parse.SkipRecipe("Unsupported arch: %s" % arch)
 
-HASH = "0dd173a7"
+HASH = "abeb78c6"
 def geth_md5(arch):
     HASHES = {
-        "aarch64": "265f9f39eca524b8a18c341aa8764381",
-        "armv7": "20c0fae5b85924ba3ea6e8f650799f1d",
-        "i686": "2882ee16ac57701a4c058fd6093c1843",
-        "x86_64": "418f7e989260ad5ae2b1d07507296da5"
+        "aarch64": "10dc522046ce4b2a526c669c3dfc7871",
+        "i686": "ac42789c389a5a490abd151635bcddeb",
+        "x86_64": "77d6575a925d024fd8193bb550f65573"
     }
     return get_by_arch(HASHES, arch)
 
 def geth_url(arch):
     URLS = {
         "aarch64": "https://gethstore.blob.core.windows.net/builds/geth-linux-arm64-${PV}-${HASH}.tar.gz",
-        "armv7": "https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-${PV}-${HASH}.tar.gz",
         "i686": "https://gethstore.blob.core.windows.net/builds/geth-linux-386-${PV}-${HASH}.tar.gz",
         "x86_64": "https://gethstore.blob.core.windows.net/builds/geth-linux-amd64-${PV}-${HASH}.tar.gz",
     }
@@ -59,3 +57,5 @@ do_install() {
 
 SYSTEMD_SERVICE:${PN} = "geth.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "disable"
+
+INSANE_SKIP:${PN} = "already-stripped"
