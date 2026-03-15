@@ -5,17 +5,15 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=25778095b6d857a291b6d8f9769d8a20"
 SRC_URI = "gitsm://github.com/monero-project/monero.git;protocol=https;branch=release-v0.18"
 SRCREV = "ef3e18b51beb937c7f786ecef0d0a0e3f6295082"
 
-S = "${WORKDIR}/git"
 DEPENDS = "boost openssl zeromq openpgm unbound monero-generate-translations-header-native"
 
 inherit cmake systemd useradd
 
-EXTRA_OECMAKE=" \
-    -D BUILD_DOCUMENTATION=OFF \
-    -D BUILD_TESTS=OFF \
-    -D CMAKE_BUILD_TYPE=release \
-    -D MONERO_PARALLEL_COMPILE_JOBS=4 \
-    -D MONERO_PARALLEL_LINK_JOBS=2 \
+EXTRA_OECMAKE = "-D BUILD_DOCUMENTATION=OFF \
+                 -D BUILD_TESTS=OFF \
+                 -D CMAKE_BUILD_TYPE=release \
+                 -D MONERO_PARALLEL_COMPILE_JOBS=4 \
+                 -D MONERO_PARALLEL_LINK_JOBS=2 \
 "
 
 do_configure:prepend() {

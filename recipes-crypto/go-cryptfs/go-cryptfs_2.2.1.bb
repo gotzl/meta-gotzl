@@ -8,8 +8,6 @@ PKG_NAME = "github.com/rfjakob/${SRCNAME}"
 SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=master"
 SRCREV = "4ba0ced3c704c1cc8696ea76d96822efdd1c7157"
 
-S = "${WORKDIR}/git"
-
 inherit pkgconfig
 
 GO_IMPORT = "import"

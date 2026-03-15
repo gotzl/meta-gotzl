@@ -20,8 +20,8 @@ def get_by_arch(hashes, arch):
 
 def lighthouse_md5(arch):
     HASHES = {
-        "aarch64": "309ed11b813387d0e6ae2603b05131ba",
-        "x86_64": "31585221a2535226658d1d35671dbf83",
+        "aarch64": "ac729aa62c538809378017e53b21b776",
+        "x86_64": "2f291d68d1d8d25ebb0d94b81b342e1b",
     }
     return get_by_arch(HASHES, arch)
 
@@ -52,12 +52,12 @@ do_install() {
     install -m 0755 ${WORKDIR}/lighthouse ${D}${bindir}
 
     install -d ${D}${sysconfdir}/lighthouse
-    install -m 0644 ${WORKDIR}/lighthouse-beacon-node.conf ${D}${sysconfdir}/lighthouse
-    install -m 0644 ${WORKDIR}/lighthouse-validator.conf ${D}${sysconfdir}/lighthouse
+    install -m 0644 ${UNPACKDIR}/lighthouse-beacon-node.conf ${D}${sysconfdir}/lighthouse
+    install -m 0644 ${UNPACKDIR}/lighthouse-validator.conf ${D}${sysconfdir}/lighthouse
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/lighthouse-beacon-node.service ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/lighthouse-validator.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/lighthouse-beacon-node.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/lighthouse-validator.service ${D}${systemd_unitdir}/system
 }
 
 PACKAGES:append = " ${SYSTEMD_PACKAGES}"

@@ -19,8 +19,8 @@ do_install:append() {
     install -m 755 ${WORKDIR}/build/target/${TARGET_SYS}-gnu/release/bitcoin-exporter ${D}${bindir}
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/bitcoin-exporter.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${UNPACKDIR}/bitcoin-exporter.service ${D}${systemd_unitdir}/system
 
     install -d ${D}${sysconfdir}/bitcoin
-    install -m 644 ${WORKDIR}/bitcoin-exporter.conf ${D}${sysconfdir}/bitcoin/    
+    install -m 644 ${UNPACKDIR}/bitcoin-exporter.conf ${D}${sysconfdir}/bitcoin/    
 }

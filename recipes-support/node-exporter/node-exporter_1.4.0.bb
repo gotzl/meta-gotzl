@@ -8,8 +8,6 @@ PKG_NAME = "github.com/prometheus/${SRCNAME}"
 SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=master"
 SRCREV = "7da1321761b3b8dfc9e496e1a60e6a476fec6018"
 
-S = "${WORKDIR}/git"
-
 inherit pkgconfig systemd useradd
 
 SYSTEMD_SERVICE:${PN} = "${SRCNAME}.service"

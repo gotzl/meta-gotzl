@@ -9,7 +9,6 @@ inherit cargo-update-recipe-crates
 # SRC_URI += "crate://crates.io/bitcoin-exporter/0.5.4"
 SRC_URI += "git://github.com/eburghar/bitcoin-exporter.git;protocol=https;nobranch=1"
 SRCREV = "85f90f39ddc82a5f505f5c6e2dbcd4f57947d47e"
-S = "${WORKDIR}/git"
 CARGO_SRC_DIR = ""
 
 

@@ -15,12 +15,12 @@ def get_by_arch(hashes, arch):
     except:
         raise bb.parse.SkipRecipe("Unsupported arch: %s" % arch)
 
-HASH = "abeb78c6"
+HASH = "9621c6ad"
 def geth_md5(arch):
     HASHES = {
-        "aarch64": "10dc522046ce4b2a526c669c3dfc7871",
-        "i686": "ac42789c389a5a490abd151635bcddeb",
-        "x86_64": "77d6575a925d024fd8193bb550f65573"
+        "aarch64": "d270e6ee5a4d0ddbdf9cbbfc3829bc0b",
+        "i686": "5bbeeedb310ae499a613317efac401a0",
+        "x86_64": "925de60686b5eaa15d5a21acfc878ecf"
     }
     return get_by_arch(HASHES, arch)
 
@@ -52,7 +52,7 @@ do_install() {
     install -m 0755 ${S}/geth ${D}${bindir}
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${WORKDIR}/geth.service ${D}${systemd_unitdir}/system    
+    install -m 0644 ${UNPACKDIR}/geth.service ${D}${systemd_unitdir}/system    
 }
 
 SYSTEMD_SERVICE:${PN} = "geth.service"
