@@ -1,28 +1,23 @@
 SUMMARY = "Prometheus node exporter"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://src/import/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
+LIC_FILES_CHKSUM = "file://src/${GO_IMPORT}/LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
-SRCNAME = "node_exporter"
+GO_IMPORT = "github.com/prometheus/node_exporter"
 
-PKG_NAME = "github.com/prometheus/${SRCNAME}"
-SRC_URI = "git://${PKG_NAME}.git;protocol=https;branch=master"
-SRCREV = "7da1321761b3b8dfc9e496e1a60e6a476fec6018"
+SRC_URI = "git://${GO_IMPORT};protocol=https;destsuffix=${GO_SRCURI_DESTSUFFIX};branch=release-1.12"
+SRCREV = "6044da783597cc3b57aef7580ddcdcff58a4ee99"
+
+B = "${S}/src/${GO_IMPORT}/bin"
 
 inherit pkgconfig systemd useradd
 
-SYSTEMD_SERVICE:${PN} = "${SRCNAME}.service"
-
-GO_IMPORT = "import"
-
-inherit go-mod
+SYSTEMD_SERVICE:${PN} = "node_exporter.service"
 
 DEPENDS:append = " curl-native "
 RDEPENDS:${PN} = "bash"
 
 
 do_compile:prepend() {
-    pushd ${S}/src/import/
-
     # don't run lint nor tests
     # FIXME: don't check certificate (even thought ca-certs are there??)
     # FIXME: don't stop the build when "running check for unused/missing packages in go.mod"
@@ -33,18 +28,27 @@ do_compile:prepend() {
 
     # only build the thing, don't do any checks
     sed -i -e 's,^all::.*,all:: common-all,g' Makefile
-    popd
 }
 # need to download go modules
 do_compile[network] = "1"
 
 
+GO_INSTALL = "${GO_IMPORT}/v2"
+
+# build executable instead of shared object
+GO_LINKSHARED = ""
+# -buildmode=pie requires external (cgo) linking on ARM and x86
+GOBUILDFLAGS:remove = "-buildmode=pie"
+
+inherit go-mod
+
+
 do_install() {
-	install -d ${D}${sbindir}
-	install -m 755 ${B}/${GO_BUILD_BINDIR}/* ${D}${sbindir}
+    install -d ${D}${sbindir}
+    install -m 755 ${B}/${GO_BUILD_BINDIR}/* ${D}${sbindir}
 
     install -d ${D}${systemd_unitdir}/system
-    install -m 0644 ${S}/src/import/examples/systemd/${SRCNAME}.service ${D}${systemd_unitdir}/system
+    install -m 0644 ${S}/src/${GO_IMPORT}/examples/systemd/node_exporter.service ${D}${systemd_unitdir}/system
 
     install -d ${D}${sysconfdir}/sysconfig
     echo "OPTIONS=\"\"" > ${D}${sysconfdir}/sysconfig/node_exporter

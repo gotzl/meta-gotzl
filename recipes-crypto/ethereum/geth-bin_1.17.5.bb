@@ -1,6 +1,6 @@
 SUMMARY = "Official Go implementation of the Ethereum protocol"
-LICENSE = "LGPLv3"
-LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+LICENSE = "LGPL-3.0-only"
+LIC_FILES_CHKSUM = "file://${S}/COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/geth:"
 SRC_URI:append = " \
@@ -34,17 +34,13 @@ def geth_url(arch):
 
 python () {
     pv = d.getVar("PV", True)
-    pv_uri = pv[0:4] + '-' + pv[4:6] + '-' + pv[6:8]
     target = d.getVar("TARGET_ARCH", True)
     geth_uri = ("%s;md5sum=%s;downloadname=%s" %
                  (geth_url(target), geth_md5(target),
                   d.getVar("PN", True) + "-" + pv + "-" + target + ".tar.gz"))
     src_uri = d.getVar("SRC_URI", True).split()
-    geth_extract_path = geth_url(target).split('/')[-1].replace('.tar.gz', '')
     d.setVar("SRC_URI", ' '.join(src_uri + [geth_uri]))
-    d.setVar("S", "${{WORKDIR}}/{}".format(geth_extract_path))
-    d.appendVarFlag("S", "vardeps", " geth_url")
-    d.appendVarFlag("S", "vardepsexclude", " WORKDIR")
+    d.setVar("S", "%s/geth-linux-%s-%s-%s" % (d.getVar("UNPACKDIR"), {"aarch64": "arm64"}[target], pv, d.getVar("HASH")))
 }
 
 do_install() {

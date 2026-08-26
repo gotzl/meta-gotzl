@@ -1,6 +1,6 @@
 SUMMARY = "Rust Ethereum 2.0 Client"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://../LICENSE;md5=139bc4b5f578ecacea78dc7b7ad3ed3c"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=139bc4b5f578ecacea78dc7b7ad3ed3c"
 
 SRC_URI:append = " \
     file://LICENSE \
@@ -20,8 +20,8 @@ def get_by_arch(hashes, arch):
 
 def lighthouse_md5(arch):
     HASHES = {
-        "aarch64": "ac729aa62c538809378017e53b21b776",
-        "x86_64": "2f291d68d1d8d25ebb0d94b81b342e1b",
+        "aarch64": "8e337413d3a19da7d5cbdb293d731063",
+        "x86_64": "ea2834e9415159796ff5da11ab5cae0b",
     }
     return get_by_arch(HASHES, arch)
 
@@ -34,22 +34,18 @@ def lighthouse_url(arch):
 
 python () {
     pv = d.getVar("PV", True)
-    pv_uri = pv[0:4] + '-' + pv[4:6] + '-' + pv[6:8]
     target = d.getVar("TARGET_ARCH", True)
     lighthouse_uri = ("%s;md5sum=%s;downloadname=%s" %
                  (lighthouse_url(target), lighthouse_md5(target),
                   d.getVar("PN", True) + "-" + pv + "-" + target + ".tar.gz"))
     src_uri = d.getVar("SRC_URI", True).split()
-    lighthouse_extract_path = lighthouse_url(target).split('/')[-1].replace('.tar.gz', '')
     d.setVar("SRC_URI", ' '.join(src_uri + [lighthouse_uri]))
-    d.setVar("S", "${{WORKDIR}}/{}".format(lighthouse_extract_path))
-    d.appendVarFlag("S", "vardeps", " lighthouse_url")
-    d.appendVarFlag("S", "vardepsexclude", " WORKDIR")
+    d.setVar("S", d.getVar("UNPACKDIR"))
 }
 
 do_install() {
     install -d ${D}${bindir}
-    install -m 0755 ${WORKDIR}/lighthouse ${D}${bindir}
+    install -m 0755 ${UNPACKDIR}/lighthouse ${D}${bindir}
 
     install -d ${D}${sysconfdir}/lighthouse
     install -m 0644 ${UNPACKDIR}/lighthouse-beacon-node.conf ${D}${sysconfdir}/lighthouse
